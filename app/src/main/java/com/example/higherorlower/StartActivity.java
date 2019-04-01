@@ -19,7 +19,7 @@ import org.json.JSONObject;
 public class StartActivity extends AppCompatActivity {
 
     private final String iter_devkey = "349dcc9373c74c6699c5d1204a271695";
-    private final String user_email = "riku394@yahoo.com";
+    private final String user_email = "removed for github upload";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
