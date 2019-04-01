@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "762164665062",
+    "firebase_url": "https://higher-or-lower-61bda.firebaseio.com",
+    "project_id": "higher-or-lower-61bda",
+    "storage_bucket": "higher-or-lower-61bda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762164665062:android:653a58da93fa6e32",
+        "android_client_info": {
+          "package_name": "com.example.higherorlower"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762164665062-mu52r76erskouacnqijbbjpddmu5fqc5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk-gkoCzy3XHDLYpw03q-KuzIzw6OWSaA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
