@@ -11,17 +11,12 @@ public class Deck {
 
     public Deck() {
 
-        mDeck = new ArrayList<Card>(Card.Suite.values().length * Card.Rank.values().length);
-
-//        mDark = new Card[52];
+        mDeck = new ArrayList<>(Card.Suite.values().length * Card.Rank.values().length);
 
         for (Card.Suite s : Card.Suite.values()) {
             for (Card.Rank r : Card.Rank.values()) {
                 Card mCard = new Card(s, r);
                 mDeck.add(mCard);
-                Log.i("Card :",
-                        String.valueOf(mCard.getRank()) + " ( " +
-                                String.valueOf(mCard.getValue()) + " ) of " + String.valueOf(mCard.getSuite()));
             }
         }
     }
@@ -29,8 +24,6 @@ public class Deck {
     public Card drawCard() {
         //removes the top card
         Card c = mDeck.get(0);
-
-//        Log.i("Card Drawn (DECK CLASS)", "Card= \n" + "s: " + c.getSuite() + " r: " +  c.getmRank() + " deck: " + c.getValue());
         mDeck.remove(0);
 
         return c;

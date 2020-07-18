@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Higher or Lower</string>
+    <string name="ofText">" of "</string>
+    <string name="vungle_app_id">5f135e41d99a2900015aa163</string>
+    <string name="vungle_ref_id">"TEST-5606587"</string>
+    <string name="streak_counter">STREAK: %d</string>
 </resources>

@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         mdeck = new Deck();
         mdeck.shuffle();
-        mdeck.shuffle();
+        Log.i("DECK", String.valueOf(mdeck.getSize()));
     }
 
     public void play(View v){
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         rankText.setText(c.getRank().toString());
         rankText.setVisibility(View.VISIBLE);
 
-        streakText.setText("STREAK: " + Integer.toString(streak));
+        streakText.setText(getString(R.string.streak_counter, streak));
         streakText.setVisibility(View.VISIBLE);
     }
 
@@ -96,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
             int id = v.getId();
             String direction = v.getResources().getResourceEntryName(id);
 
-            Log.i("CARD", c.getSuite().toString());
+            Log.i("CARD", c.getRank().toString() + getString(R.string.ofText) + c.getSuite().toString());
+
             int cardResID = getResources().getIdentifier(c.suiteCardFinder(getApplicationContext()),
                     "drawable", getPackageName());
             cardImage.setImageResource(cardResID);
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         prevCardValue = cur;
-        streakText.setText("STREAK: " + Integer.toString(streak));
+        streakText.setText(getString(R.string.streak_counter, streak));
     }
 
 
