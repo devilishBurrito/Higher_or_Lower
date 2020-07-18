@@ -4,4 +4,7 @@
     <string name="vungle_app_id">5f135e41d99a2900015aa163</string>
     <string name="vungle_ref_id">"TEST-5606587"</string>
     <string name="streak_counter">STREAK: %d</string>
+    <string name="r_string_login_button">LOGIN</string>
+    <string name="r_string_update_button">UPDATE</string>
+    <string name="r_string_blank_button">button</string>
 </resources>

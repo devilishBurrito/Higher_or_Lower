@@ -27,8 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/startButton"
         android:layout_centerHorizontal="true"
-        android:text="Iterable Login"
-        android:onClick="iterable"/>
+        android:text="@string/r_string_login_button" />
 
     <Button
         android:id="@+id/updateLogin"
@@ -36,8 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/loginButton"
         android:layout_centerHorizontal="true"
-        android:text="Update Login Details"
-        android:onClick="iterableUpdate"/>
+        android:text="@string/r_string_update_button"
+        />
 
     <Button
         android:id="@+id/sendEventButton"
@@ -46,7 +45,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:text="Button" />
+        android:text="@string/r_string_blank_button" />
 
     <Button
         android:id="@+id/checkNotifButton"
@@ -55,7 +54,6 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:onClick="checkforNotif"
-        android:text="Check Notifications" />
+        android:text="@string/r_string_blank_button" />
 
 </RelativeLayout>
