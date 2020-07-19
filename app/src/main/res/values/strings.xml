@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">Higher or Lower</string>
-    <string name="ofText">" of "</string>
+    <string name="ofText"> of </string>
     <string name="vungle_app_id">5f135e41d99a2900015aa163</string>
-    <string name="vungle_ref_id">"TEST-5606587"</string>
+    <string name="vungle_interst_id">TEST-5606587</string>
+    <string name="vungle_banner_id">BANNERTEST-9169600</string>
+    <string name="vungle_adload_error">Ad Not Loaded</string>
     <string name="streak_counter">STREAK: %d</string>
-    <string name="r_string_login_button">LOGIN</string>
-    <string name="r_string_update_button">UPDATE</string>
-    <string name="r_string_blank_button">button</string>
+    <string name="login_button_text">LOGIN</string>
+    <string name="update_button_text">UPDATE</string>
+    <string name="extra_button1_text">Play Banner</string>
+    <string name="extra_button2_text">button</string>
+    <string name="start_button_text">PLAY</string>
+    <string name="high_score_text">HighScore: %d</string>
+    <string name="higher_button_text">HIGHER</string>
+    <string name="lower_button_text">LOWER</string>
+    <string name="play_button_text">PLAY</string>
 </resources>

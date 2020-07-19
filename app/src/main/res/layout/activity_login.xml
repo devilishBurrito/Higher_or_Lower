@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_temp">
 
+    <RelativeLayout
+        android:id="@+id/vungle_banner"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        ></RelativeLayout>
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -11,15 +18,18 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/startButton"
         android:textSize="50sp"
-        android:text="@string/app_name" />
+        android:textColor="#fff"
+        android:text="@string/app_name"
+        />
 
     <Button
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="PLAY"
-        android:textSize="30sp"/>
+        android:text="@string/start_button_text"
+        android:textSize="30sp"
+        />
 
     <Button
         android:id="@+id/loginButton"
@@ -27,7 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/startButton"
         android:layout_centerHorizontal="true"
-        android:text="@string/r_string_login_button" />
+        android:text="@string/login_button_text"
+        />
 
     <Button
         android:id="@+id/updateLogin"
@@ -35,25 +46,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/loginButton"
         android:layout_centerHorizontal="true"
-        android:text="@string/r_string_update_button"
+        android:text="@string/update_button_text"
         />
 
     <Button
-        android:id="@+id/sendEventButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:text="@string/r_string_blank_button" />
-
-    <Button
-        android:id="@+id/checkNotifButton"
+        android:id="@+id/extraButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:text="@string/r_string_blank_button" />
+        android:text="@string/extra_button1_text"
+        />
+
+    <Button
+        android:id="@+id/extraButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/extra_button2_text"
+        />
+
+
+
 
 </RelativeLayout>

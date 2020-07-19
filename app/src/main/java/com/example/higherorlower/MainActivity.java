@@ -1,6 +1,6 @@
 package com.example.higherorlower;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,33 +9,41 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// VUNGLE IMPORTS
+import com.vungle.warren.Vungle;
+import com.vungle.warren.LoadAdCallback;        // Load ad callback
+import com.vungle.warren.error.VungleException;  // onError message
+
 public class MainActivity extends AppCompatActivity {
 
     Button playButton;
     Button highButton;
     Button lowButton;
     ImageView cardImage;
-    ImageView suiteImage;
     TextView rankText;
     TextView streakText;
+    TextView highScoreText;
 
     int cardValue;
     int prevCardValue;
     int streak;
     int highScore;
     Deck mdeck;
+    String vungle_ref_id;
+    String error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        init();
+        vungle_ref_id = getString(R.string.vungle_interst_id);
+        initialize();
+
     }
 
 
-
-    public void init(){
+    public void initialize(){
         playButton = findViewById(R.id.playButton);
         playButton.setVisibility(View.VISIBLE);
         highButton = findViewById(R.id.HIGHER);
@@ -45,13 +53,14 @@ public class MainActivity extends AppCompatActivity {
         cardImage = findViewById(R.id.drawCard);
         cardImage.setImageResource(R.drawable.basecard_back);
 
-        suiteImage = findViewById(R.id.suiteImageView);
-        suiteImage.setVisibility(View.GONE);
         rankText = findViewById(R.id.rankTextView);
         rankText.setVisibility(View.GONE);
 
         streakText = findViewById(R.id.streakTextView);
         streakText.setVisibility(View.GONE);
+
+        highScoreText = findViewById(R.id.highScore);
+        highScoreText.setVisibility(View.GONE);
 
         streak = 0;
         highScore = 0;
@@ -59,12 +68,14 @@ public class MainActivity extends AppCompatActivity {
         mdeck = new Deck();
         mdeck.shuffle();
         Log.i("DECK", String.valueOf(mdeck.getSize()));
+
+        // VUNGLE-SDK
+        adLoad();
     }
 
     public void play(View v){
         Card c = mdeck.drawCard();
         prevCardValue = c.getValue();
-        // this.players.get(1).drawCard(c);
 
         playButton.setVisibility(View.GONE);
         highButton.setVisibility(View.VISIBLE);
@@ -75,16 +86,14 @@ public class MainActivity extends AppCompatActivity {
                 "drawable", getPackageName());
         cardImage.setImageResource(cardResID);
 
-        int suiteResID = getResources().getIdentifier(c.suiteLogoFinder(getApplicationContext()),
-                "drawable", getPackageName());
-        suiteImage.setImageResource(suiteResID);
-        suiteImage.setVisibility(View.VISIBLE);
-
         rankText.setText(c.getRank().toString());
         rankText.setVisibility(View.VISIBLE);
 
         streakText.setText(getString(R.string.streak_counter, streak));
         streakText.setVisibility(View.VISIBLE);
+
+        highScoreText.setText(getString(R.string.high_score_text, highScore));
+        highScoreText.setVisibility(View.VISIBLE);
     }
 
     public void draw(View v) {
@@ -101,11 +110,6 @@ public class MainActivity extends AppCompatActivity {
             int cardResID = getResources().getIdentifier(c.suiteCardFinder(getApplicationContext()),
                     "drawable", getPackageName());
             cardImage.setImageResource(cardResID);
-
-            int suiteResID = getResources().getIdentifier(c.suiteLogoFinder(getApplicationContext()),
-                    "drawable", getPackageName());
-            suiteImage.setImageResource(suiteResID);
-            suiteImage.setVisibility(View.VISIBLE);
 
             rankText.setText(c.getRank().toString());
             rankText.setVisibility(View.VISIBLE);
@@ -126,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (cur <= prev){
                 streak = 0;
                 Toast.makeText(this, "Oof... nice try", Toast.LENGTH_SHORT).show();
+                playAd(vungle_ref_id);
             }
         } else if (dir.equals("LOWER")){
             if(cur < prev){
@@ -134,11 +139,46 @@ public class MainActivity extends AppCompatActivity {
             } else if (cur >= prev){
                 streak = 0;
                 Toast.makeText(this, "Oof... nice try", Toast.LENGTH_SHORT).show();
+                playAd(vungle_ref_id);
             }
         }
 
         prevCardValue = cur;
         streakText.setText(getString(R.string.streak_counter, streak));
+        highScoreCheck(streak);
+
+    }
+
+    private void adLoad() {
+        if (Vungle.isInitialized()) {
+            Vungle.loadAd(vungle_ref_id, new LoadAdCallback() {
+                @Override
+                public void onAdLoad(String placementReferenceId) { }
+
+                @Override
+                public void onError(String placementReferenceId, VungleException exception) {
+                    error = exception.toString();
+                    Log.e(StartActivity.TAG, error);
+                }
+            });
+        }
+    }
+
+    private void playAd(String placementID){
+        if (Vungle.canPlayAd(placementID)) {
+            Vungle.playAd(placementID, null, StartActivity.vunglePlayAdCallback);
+        } else {
+            Toast.makeText(this, "Ad Not Loaded", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+    private void highScoreCheck(int streak) {
+        if (streak>highScore){
+            highScore = streak;
+            highScoreText.setText(getString(R.string.high_score_text, highScore));
+        }
     }
 
 
