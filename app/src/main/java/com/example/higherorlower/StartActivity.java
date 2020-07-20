@@ -1,7 +1,6 @@
 package com.example.higherorlower;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -142,15 +141,15 @@ public class StartActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-
+//            startActivity(new Intent(StartActivity.this, Leaderboard.class));
         }
         });
 
-        Button update = findViewById(R.id.updateLogin);
-        update.setOnClickListener(new View.OnClickListener() {
+        Button leaderboard = findViewById(R.id.leaderboardButton);
+        leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-
+            startActivity(new Intent(StartActivity.this, Leaderboard.class));
         }
         });
 
@@ -173,7 +172,7 @@ public class StartActivity extends AppCompatActivity {
                     Vungle.playAd(vungle_interst_id, null, StartActivity.vunglePlayAdCallback);
                 } else {
                 //unable to get Banner ads working at this time.
-                    Toast.makeText(getApplicationContext(), getString(R.string.vungle_adload_error), Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), getString(R.string.vungle_adload_error), Toast.LENGTH_SHORT).show();
             }
         }
         });

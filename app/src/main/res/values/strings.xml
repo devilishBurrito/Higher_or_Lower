@@ -7,7 +7,7 @@
     <string name="vungle_adload_error">Ad Not Loaded</string>
     <string name="streak_counter">STREAK: %d</string>
     <string name="login_button_text">LOGIN</string>
-    <string name="update_button_text">UPDATE</string>
+    <string name="leaderboard_button_text">Leaderboard (WIP)</string>
     <string name="extra_button1_text">Play Banner</string>
     <string name="extra_button2_text">button</string>
     <string name="start_button_text">PLAY</string>
@@ -15,4 +15,8 @@
     <string name="higher_button_text">HIGHER</string>
     <string name="lower_button_text">LOWER</string>
     <string name="play_button_text">PLAY</string>
+    <string name="blank_tab_text">TBA</string>
+    <string name="tab_higher_lower">HIGH/LOW</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
