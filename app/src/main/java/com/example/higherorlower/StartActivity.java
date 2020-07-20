@@ -25,10 +25,7 @@ public class StartActivity extends AppCompatActivity {
     static PlayAdCallback vunglePlayAdCallback;
     static LoadAdCallback vungleLoadAdCallback;
 
-    String vungle_app_id;
-    String vungle_banner_id;
-    String vungle_interst_id;
-    String error;
+    String vungle_app_id, vungle_banner_id, vungle_interst_id, error;
     static String TAG = "VUNGLE-SDK";
     RelativeLayout bannerContainer;
 

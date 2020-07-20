@@ -16,21 +16,13 @@ import com.vungle.warren.error.VungleException;  // onError message
 
 public class MainActivity extends AppCompatActivity {
 
-    Button playButton;
-    Button highButton;
-    Button lowButton;
+    Button playButton, highButton, lowButton;
     ImageView cardImage;
-    TextView rankText;
-    TextView streakText;
-    TextView highScoreText;
+    TextView rankText, streakText, highScoreText;
 
-    int cardValue;
-    int prevCardValue;
-    int streak;
-    int highScore;
+    int cardValue, prevCardValue, streak, highScore;
     Deck mdeck;
-    String vungle_ref_id;
-    String error;
+    String vungle_ref_id, error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

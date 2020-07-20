@@ -12,9 +12,7 @@ import com.google.android.material.tabs.TabLayout;
 public class Leaderboard extends AppCompatActivity {
 
     TabLayout tabLayout;
-    TabItem highLow;
-    TabItem blanktab1;
-    TabItem blanktab2;
+    TabItem highLow, blanktab1, blanktab2;
     ViewPager viewPager;
 
 
