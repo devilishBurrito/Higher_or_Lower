@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    buildToolsVersion = '30.0.0'
     compileSdkVersion 30
+
     defaultConfig {
         applicationId "com.example.higherorlower"
         minSdkVersion 26
@@ -21,21 +23,18 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'com.google.android.material:material:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    // VUNGLE -- SDK
-    implementation 'com.vungle:publisher-sdk-android:6.7.0'
-
-    // VUNGLE -- Recommended for SDK to be able to get Android Advertising ID
-    implementation 'com.google.android.gms:play-services-basement:17.3.0'
-    implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
-
+    // Chartboost SDK & GooglePlayServices requirement
+    implementation "com.google.android.gms:play-services-base:17.4.0"
+    implementation "com.google.android.gms:play-services-ads-identifier:17.0.0"
+    implementation 'com.chartboost:chartboost-sdk:8.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

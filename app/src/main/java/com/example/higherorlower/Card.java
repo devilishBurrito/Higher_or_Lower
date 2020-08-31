@@ -65,7 +65,7 @@ public class Card {
             // "
         } else {
             Toast.makeText(context, "no suite", Toast.LENGTH_SHORT).show();
-            return null;
+            return "basecard_spades";
         }
     }
 

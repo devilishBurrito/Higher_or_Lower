@@ -9,60 +9,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/startButton"
+        android:layout_above="@+id/cacheInterButton"
         android:textSize="50sp"
         android:textColor="#fff"
-        android:text="@string/app_name"
+        android:text="@string/cb_title"
         />
 
+
+
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/cacheInterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/start_button_text"
-        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/cb_cache_inter"
         />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/cacheRewaredButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/startButton"
+        android:layout_below="@id/cacheInterButton"
         android:layout_centerHorizontal="true"
-        android:text="@string/login_button_text"
-        android:onClick="login_onclick"
+        android:text="@string/cb_cache_reward"
         />
 
     <Button
-        android:id="@+id/leaderboardButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginButton"
-        android:layout_centerHorizontal="true"
-        android:text="@string/leaderboard_button_text"
-        />
-
-    <Button
-        android:id="@+id/extraButton1"
+        android:id="@+id/showInterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:text="@string/extra_button1_text"
-        android:onClick="extraButton1_onClick"
+        android:text="@string/cb_show_inter"
         />
 
     <Button
-        android:id="@+id/extraButton2"
+        android:id="@+id/showRewardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:text="@string/extra_button2_text"
-        android:onClick="extraButton2_onClick"
+        android:text="@string/cb_show_rewarded"
         />
 
 

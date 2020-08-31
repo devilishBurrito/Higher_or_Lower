@@ -1,15 +1,11 @@
 <resources>
     <string name="app_name">Higher or Lower</string>
     <string name="ofText"> of </string>
-    <string name="vungle_app_id">5f135e41d99a2900015aa163</string>
-    <string name="vungle_interst_id">TEST-5606587</string>
-    <string name="vungle_banner_id">BANNERTEST-9169600</string>
-    <string name="vungle_adload_error">Ad Not Loaded</string>
     <string name="streak_counter">STREAK: %d</string>
-    <string name="login_button_text">LOGIN</string>
+    <string name="login_button_text">CHARTBOOST</string>
     <string name="leaderboard_button_text">Leaderboard (WIP)</string>
-    <string name="extra_button1_text">Play Banner</string>
-    <string name="extra_button2_text">button</string>
+    <string name="extra_button1_text">Show Interstitial</string>
+    <string name="extra_button2_text">Show Rewarded</string>
     <string name="start_button_text">PLAY</string>
     <string name="high_score_text">HighScore: %d</string>
     <string name="higher_button_text">HIGHER</string>
@@ -19,4 +15,15 @@
     <string name="tab_higher_lower">HIGH/LOW</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cb_appid">5b33b8446a0af32a0dfa10c8</string>
+    <string name="cb_appsig">8ba672dd317a6c4459eb482724f1180a740e0b08</string>
+
+    <string name="cb_appid2">4f7b433509b6025804000002</string>
+    <string name="cb_appsig2">dd2d41b69ac01b80f443f5b6cf06096d457f82bd</string>
+    <string name="cb_title">Chartboost SDK</string>
+    <string name="cb_cache_inter">Cache Interstitial</string>
+    <string name="cb_cache_reward">Cache RewardedVideo</string>
+    <string name="cb_show_inter">Show Interstitial</string>
+    <string name="cb_show_rewarded">Show RewardedVideo</string>
+
 </resources>

@@ -1,177 +1,151 @@
 package com.example.higherorlower;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-// VUNGLE IMPORTS
-import com.vungle.warren.Vungle;
-import com.vungle.warren.LoadAdCallback;        // Load ad callback
-import com.vungle.warren.error.VungleException;  // onError message
+// CHARTBOOST IMPORTS
+import com.chartboost.sdk.Chartboost;
+import com.chartboost.sdk.CBImpressionActivity;
+import com.chartboost.sdk.CBLocation;
+import com.chartboost.sdk.ChartboostDelegate;
+import com.chartboost.sdk.Libraries.CBLogging;
+import com.chartboost.sdk.Model.CBError;
+import com.chartboost.sdk.Privacy.model.CCPA;
+import com.chartboost.sdk.Privacy.model.GDPR;
 
-public class MainActivity extends AppCompatActivity {
 
-    Button playButton, highButton, lowButton;
-    ImageView cardImage;
-    TextView rankText, streakText, highScoreText;
+public class MainActivity extends Activity {
 
-    int cardValue, prevCardValue, streak, highScore;
-    Deck mdeck;
-    String vungle_ref_id, error;
+
+    String cb_app_id, cb_appsig;
+    static String TAG = "Chartboost-SDK";
+    public final String inter_loc = CBLocation.LOCATION_DEFAULT;
+    public final String reward_loc = CBLocation.LOCATION_HOME_SCREEN;
+
+    RelativeLayout bannerContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
-        vungle_ref_id = getString(R.string.vungle_interst_id);
-        initialize();
+        cb_init();
+
+        start();
+    }
+
+    public void cb_init(){
+        //Chartboost SDK
+        Chartboost.addDataUseConsent(this, new GDPR(GDPR.GDPR_CONSENT.BEHAVIORAL));
+        Chartboost.addDataUseConsent(this, new CCPA(CCPA.CCPA_CONSENT.OPT_IN_SALE));
+
+        cb_app_id = getString(R.string.cb_appid);
+        cb_appsig = getString(R.string.cb_appsig);
+        Chartboost.setDelegate(myDelegate);
+        Chartboost.startWithAppId(getApplicationContext(), cb_app_id, cb_appsig);
+        Chartboost.setLoggingLevel(CBLogging.Level.ALL);
+
+        Chartboost.setAutoCacheAds(true);
+        Chartboost.setShouldRequestInterstitialsInFirstSession(true);
+    }
+
+    private void start() {
+
+        Button start = findViewById(R.id.startButton);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v){
+            startActivity(new Intent(MainActivity.this, HighLowActivity.class));
+        }
+        });
+
+        Button login = findViewById(R.id.loginButton);
+
+
+        Button leaderboard = findViewById(R.id.leaderboardButton);
+        leaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v){
+            startActivity(new Intent(MainActivity.this, Leaderboard.class));
+        }
+        });
+
+        Button showInterst = findViewById(R.id.extraButton1);
+        Button showRewarded = findViewById(R.id.extraButton2);
 
     }
 
+    public void login_onclick(View v) {
+        startActivity(new Intent(MainActivity.this,CBActivity.class));
 
-    public void initialize(){
-        playButton = findViewById(R.id.playButton);
-        playButton.setVisibility(View.VISIBLE);
-        highButton = findViewById(R.id.HIGHER);
-        highButton.setVisibility(View.GONE);
-        lowButton = findViewById(R.id.LOWER);
-        lowButton.setVisibility(View.GONE);
-        cardImage = findViewById(R.id.drawCard);
-        cardImage.setImageResource(R.drawable.basecard_back);
-
-        rankText = findViewById(R.id.rankTextView);
-        rankText.setVisibility(View.GONE);
-
-        streakText = findViewById(R.id.streakTextView);
-        streakText.setVisibility(View.GONE);
-
-        highScoreText = findViewById(R.id.highScore);
-        highScoreText.setVisibility(View.GONE);
-
-        streak = 0;
-        highScore = 0;
-
-        mdeck = new Deck();
-        mdeck.shuffle();
-        Log.i("DECK", String.valueOf(mdeck.getSize()));
-
-        // VUNGLE-SDK
-        adLoad();
     }
 
-    public void play(View v){
-        Card c = mdeck.drawCard();
-        prevCardValue = c.getValue();
-
-        playButton.setVisibility(View.GONE);
-        highButton.setVisibility(View.VISIBLE);
-        lowButton.setVisibility(View.VISIBLE);
-
-        Log.i("CARD", c.getSuite().toString());
-        int cardResID = getResources().getIdentifier(c.suiteCardFinder(getApplicationContext()),
-                "drawable", getPackageName());
-        cardImage.setImageResource(cardResID);
-
-        rankText.setText(c.getRank().toString());
-        rankText.setVisibility(View.VISIBLE);
-
-        streakText.setText(getString(R.string.streak_counter, streak));
-        streakText.setVisibility(View.VISIBLE);
-
-        highScoreText.setText(getString(R.string.high_score_text, highScore));
-        highScoreText.setVisibility(View.VISIBLE);
-    }
-
-    public void draw(View v) {
-
-        if (mdeck.getSize() >= 1) {
-            Card c = mdeck.drawCard();
-            cardValue = c.getValue();
-
-            int id = v.getId();
-            String direction = v.getResources().getResourceEntryName(id);
-
-            Log.i("CARD", c.getRank().toString() + getString(R.string.ofText) + c.getSuite().toString());
-
-            int cardResID = getResources().getIdentifier(c.suiteCardFinder(getApplicationContext()),
-                    "drawable", getPackageName());
-            cardImage.setImageResource(cardResID);
-
-            rankText.setText(c.getRank().toString());
-            rankText.setVisibility(View.VISIBLE);
-
-            checkHighLow(prevCardValue, cardValue, direction);
-
-        } else {
-            Toast.makeText(this, "No remaining cards", Toast.LENGTH_LONG).show();
+    public void extraButton1_onClick(View view) {
+        if (Chartboost.hasInterstitial(inter_loc)) {
+            Toast.makeText(this, "Interstitial Playing", Toast.LENGTH_SHORT).show();
+            Chartboost.showInterstitial(inter_loc); }
+        else {
+            Toast.makeText(this, "No Interstitial, " +
+                    "Caching Again", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void checkHighLow(int prev, int cur, String dir){
-
-        if (dir.equals("HIGHER")){
-            if(cur > prev){
-                streak++;
-                Toast.makeText(this, "NICE!", Toast.LENGTH_SHORT).show();
-            } else if (cur <= prev){
-                streak = 0;
-                Toast.makeText(this, "Oof... nice try", Toast.LENGTH_SHORT).show();
-                playAd(vungle_ref_id);
-            }
-        } else if (dir.equals("LOWER")){
-            if(cur < prev){
-                streak++;
-                Toast.makeText(this, "NICE!", Toast.LENGTH_SHORT).show();
-            } else if (cur >= prev){
-                streak = 0;
-                Toast.makeText(this, "Oof... nice try", Toast.LENGTH_SHORT).show();
-                playAd(vungle_ref_id);
-            }
-        }
-
-        prevCardValue = cur;
-        streakText.setText(getString(R.string.streak_counter, streak));
-        highScoreCheck(streak);
-
+    public void extraButton2_onClick(View view) {
+        Chartboost.showRewardedVideo(reward_loc);
     }
 
-    private void adLoad() {
-        if (Vungle.isInitialized()) {
-            Vungle.loadAd(vungle_ref_id, new LoadAdCallback() {
-                @Override
-                public void onAdLoad(String placementReferenceId) { }
+    public ChartboostDelegate myDelegate = new ChartboostDelegate() {
+        // Declare delegate methods here, see CBSample project for examples
 
-                @Override
-                public void onError(String placementReferenceId, VungleException exception) {
-                    error = exception.toString();
-                    Log.e(StartActivity.TAG, error);
-                }
-            });
+        @Override
+        public void didInitialize(){
+            Log.i(TAG,"CB SDK successfully initialized");
         }
-    }
 
-    private void playAd(String placementID){
-        if (Vungle.canPlayAd(placementID)) {
-            Vungle.playAd(placementID, null, StartActivity.vunglePlayAdCallback);
-        } else {
-            Toast.makeText(this, "Ad Not Loaded", Toast.LENGTH_SHORT).show();
+        @Override
+        public void didCacheInterstitial(String location){
+            Toast.makeText(MainActivity.this, "WTF", Toast.LENGTH_SHORT).show();
+            Log.i(TAG,"Interstitial successfully cached at " + location );
         }
-    }
 
-
-
-    private void highScoreCheck(int streak) {
-        if (streak>highScore){
-            highScore = streak;
-            highScoreText.setText(getString(R.string.high_score_text, highScore));
+        @Override
+        public void didDisplayInterstitial(String location){
+            Log.i(TAG,"Interstitial successfully displayed at " + location );
         }
-    }
+
+        @Override
+        public void didFailToLoadInterstitial(String location, CBError.CBImpressionError error){
+            Toast.makeText(MainActivity.this, "WTF", Toast.LENGTH_SHORT).show();
+            Log.e(TAG,"Interstitial failed to load at " + location + " with error: " + error.name());
+        }
+
+        @Override
+        public void didCacheRewardedVideo(String location){
+            Log.i(TAG,"Rewarded Video successfully cached at " + location );
+        }
+
+        @Override
+        public void didDisplayRewardedVideo(String location){
+            Log.i(TAG,"Rewarded Video successfully displayed at " + location );
+        }
+
+        @Override
+        public void didFailToLoadRewardedVideo(String location,
+                                               CBError.CBImpressionError error) {
+            Log.e(TAG,"Rewarded Video failed to load at " + location + " with error: " + error.name());
+        }
+    };
 
 
 }
+
