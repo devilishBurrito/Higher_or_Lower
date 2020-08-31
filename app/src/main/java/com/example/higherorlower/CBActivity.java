@@ -48,14 +48,24 @@ public class CBActivity extends Activity {
         show_inter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Chartboost.showInterstitial(inter_loc);
+                if (Chartboost.hasInterstitial(inter_loc)) {
+                    Chartboost.showInterstitial(inter_loc);
+                } else {
+                    Toast.makeText(CBActivity.this, "No Cached Interstial", Toast.LENGTH_SHORT).show();
+                    Chartboost.cacheInterstitial(inter_loc);
+                }
             }
         });
         show_reward = findViewById(R.id.showRewardButton);
         show_reward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Chartboost.showRewardedVideo(reward_loc);
+                if (Chartboost.hasRewardedVideo(reward_loc)) {
+                    Chartboost.showRewardedVideo(reward_loc);
+                } else {
+                    Toast.makeText(CBActivity.this, "No Cached RewardedVideo", Toast.LENGTH_SHORT).show();
+                    Chartboost.cacheRewardedVideo(reward_loc);
+                }
             }
         });
     }
