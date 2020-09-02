@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 // CHARTBOOST IMPORTS
 import com.chartboost.sdk.Chartboost;
-import com.chartboost.sdk.CBImpressionActivity;
 import com.chartboost.sdk.CBLocation;
 import com.chartboost.sdk.ChartboostDelegate;
 import com.chartboost.sdk.Libraries.CBLogging;
@@ -80,8 +79,8 @@ public class MainActivity extends Activity {
         }
         });
 
-        Button showInterst = findViewById(R.id.extraButton1);
-        Button showRewarded = findViewById(R.id.extraButton2);
+        Button extraButton1 = findViewById(R.id.extraButton1);
+        Button extraButton2 = findViewById(R.id.extraButton2);
 
     }
 
@@ -90,59 +89,12 @@ public class MainActivity extends Activity {
 
     }
 
-    public void extraButton1_onClick(View view) {
-        if (Chartboost.hasInterstitial(inter_loc)) {
-            Toast.makeText(this, "Interstitial Playing", Toast.LENGTH_SHORT).show();
-            Chartboost.showInterstitial(inter_loc); }
-        else {
-            Toast.makeText(this, "No Interstitial, " +
-                    "Caching Again", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void extraButton2_onClick(View view) {
-        Chartboost.showRewardedVideo(reward_loc);
-    }
-
     public ChartboostDelegate myDelegate = new ChartboostDelegate() {
         // Declare delegate methods here, see CBSample project for examples
 
         @Override
         public void didInitialize(){
             Log.i(TAG,"CB SDK successfully initialized");
-        }
-
-        @Override
-        public void didCacheInterstitial(String location){
-            Toast.makeText(MainActivity.this, "WTF", Toast.LENGTH_SHORT).show();
-            Log.i(TAG,"Interstitial successfully cached at " + location );
-        }
-
-        @Override
-        public void didDisplayInterstitial(String location){
-            Log.i(TAG,"Interstitial successfully displayed at " + location );
-        }
-
-        @Override
-        public void didFailToLoadInterstitial(String location, CBError.CBImpressionError error){
-            Toast.makeText(MainActivity.this, "WTF", Toast.LENGTH_SHORT).show();
-            Log.e(TAG,"Interstitial failed to load at " + location + " with error: " + error.name());
-        }
-
-        @Override
-        public void didCacheRewardedVideo(String location){
-            Log.i(TAG,"Rewarded Video successfully cached at " + location );
-        }
-
-        @Override
-        public void didDisplayRewardedVideo(String location){
-            Log.i(TAG,"Rewarded Video successfully displayed at " + location );
-        }
-
-        @Override
-        public void didFailToLoadRewardedVideo(String location,
-                                               CBError.CBImpressionError error) {
-            Log.e(TAG,"Rewarded Video failed to load at " + location + " with error: " + error.name());
         }
     };
 

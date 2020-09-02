@@ -80,7 +80,6 @@ public class CBActivity extends Activity {
 
         @Override
         public void didCacheInterstitial(String location){
-            Toast.makeText(CBActivity.this, "WTF", Toast.LENGTH_SHORT).show();
             Log.i(TAG,"Interstitial successfully cached at " + location );
         }
 
@@ -91,7 +90,6 @@ public class CBActivity extends Activity {
 
         @Override
         public void didFailToLoadInterstitial(String location, CBError.CBImpressionError error){
-            Toast.makeText(CBActivity.this, "WTF", Toast.LENGTH_SHORT).show();
             Log.e(TAG,"Interstitial failed to load at " + location + " with error: " + error.name());
         }
 

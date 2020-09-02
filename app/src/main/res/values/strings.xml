@@ -4,8 +4,8 @@
     <string name="streak_counter">STREAK: %d</string>
     <string name="login_button_text">CHARTBOOST</string>
     <string name="leaderboard_button_text">Leaderboard (WIP)</string>
-    <string name="extra_button1_text">Show Interstitial</string>
-    <string name="extra_button2_text">Show Rewarded</string>
+    <string name="extra_button1_text">TBA</string>
+    <string name="extra_button2_text">TBA</string>
     <string name="start_button_text">PLAY</string>
     <string name="high_score_text">HighScore: %d</string>
     <string name="higher_button_text">HIGHER</string>
@@ -21,6 +21,8 @@
     <string name="cb_appid2">4f7b433509b6025804000002</string>
     <string name="cb_appsig2">dd2d41b69ac01b80f443f5b6cf06096d457f82bd</string>
     <string name="cb_title">Chartboost SDK</string>
+    <string name="cb_inter">Interstitial</string>
+    <string name="cb_reward">RewardedVid</string>
     <string name="cb_cache_inter">Cache Interstitial</string>
     <string name="cb_cache_reward">Cache RewardedVideo</string>
     <string name="cb_show_inter">Show Interstitial</string>
