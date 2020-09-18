@@ -28,4 +28,11 @@
     <string name="cb_show_inter">Show Interstitial</string>
     <string name="cb_show_rewarded">Show RewardedVideo</string>
 
+    <string name="iter_title">Iterable SDK</string>
+    <string name="iter_apikey">349dcc9373c74c6699c5d1204a271695</string>
+    <string name="iter_email">joelwilliamsjr@gmail.com</string>
+    <string name="iter_button1">Update Profile</string>
+    <string name="iter_button2">Send Event</string>
+    <string name="iter_button3">Render Message</string>
+
 </resources>

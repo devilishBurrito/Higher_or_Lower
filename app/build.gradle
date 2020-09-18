@@ -36,10 +36,14 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    // Chartboost SDK & GooglePlayServices requirement
+    // CB SDK & GooglePlay reqs
     implementation "com.google.android.gms:play-services-base:17.4.0"
     implementation "com.google.android.gms:play-services-ads-identifier:17.0.0"
     implementation 'com.chartboost:chartboost-sdk:8.1.0'
+
+    // Iter SDK & Firebase reqs
+    implementation 'com.iterable:iterableapi:3.2.2'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
 }
 
 apply plugin: 'com.google.gms.google-services'

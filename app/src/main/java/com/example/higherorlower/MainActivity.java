@@ -23,11 +23,22 @@ import com.chartboost.sdk.Privacy.model.CCPA;
 import com.chartboost.sdk.Privacy.model.GDPR;
 
 
+// TODO: 9/16/20 Create "Pause" function for when user backgrounds / closes app 
+// TODO: 9/16/20 create "resume" function allowing user to resume game where left off
+// TODO: 9/16/20 add background music (royalty free) that pauses when app is backgrounded and resumes when foregrounded
+// TODO: 9/16/20 start blackjack game 
+// TODO: 9/16/20 figure out how to migrate git data to a new app (i want to change the android package name)
+// TODO: 9/16/20 continue scoreboard activities
+// TODO: 9/17/20 add user account creation feature (just username, leaderboard initials and password)
+// TODO: 9/17/20 add user login feature (similar to netflix select account) that asks for password
+// TODO: 9/17/20 add user profile page
+
+
 public class MainActivity extends Activity {
 
 
     String cb_app_id, cb_appsig;
-    static String TAG = "Chartboost-SDK";
+    static String TAG = "Integration-SDK";
     public final String inter_loc = CBLocation.LOCATION_DEFAULT;
     public final String reward_loc = CBLocation.LOCATION_HOME_SCREEN;
 
@@ -38,12 +49,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        cb_init();
+        sdktest_init();
 
         start();
     }
 
-    public void cb_init(){
+    public void sdktest_init(){
         //Chartboost SDK
         Chartboost.addDataUseConsent(this, new GDPR(GDPR.GDPR_CONSENT.BEHAVIORAL));
         Chartboost.addDataUseConsent(this, new CCPA(CCPA.CCPA_CONSENT.OPT_IN_SALE));
@@ -52,7 +63,7 @@ public class MainActivity extends Activity {
         cb_appsig = getString(R.string.cb_appsig);
         Chartboost.setDelegate(myDelegate);
         Chartboost.startWithAppId(getApplicationContext(), cb_app_id, cb_appsig);
-        Chartboost.setLoggingLevel(CBLogging.Level.ALL);
+//        Chartboost.setLoggingLevel(CBLogging.Level.ALL);
 
         Chartboost.setAutoCacheAds(true);
         Chartboost.setShouldRequestInterstitialsInFirstSession(true);
@@ -80,6 +91,13 @@ public class MainActivity extends Activity {
         });
 
         Button extraButton1 = findViewById(R.id.extraButton1);
+        extraButton1.setText("Iterable");
+        extraButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v){
+                startActivity(new Intent(MainActivity.this, IterActivity.class));
+            }
+        });
         Button extraButton2 = findViewById(R.id.extraButton2);
 
     }

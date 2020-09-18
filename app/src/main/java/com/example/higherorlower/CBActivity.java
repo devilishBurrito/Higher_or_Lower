@@ -27,7 +27,7 @@ public class CBActivity extends Activity {
 
         setContentView(R.layout.activity_cb);
         Chartboost.setDelegate(myDelegate);
-        Chartboost.setLoggingLevel(CBLogging.Level.ALL);
+//        Chartboost.setLoggingLevel(CBLogging.Level.ALL);
 
         cache_inter = findViewById(R.id.cacheInterButton);
         cache_inter.setOnClickListener(new View.OnClickListener() {
