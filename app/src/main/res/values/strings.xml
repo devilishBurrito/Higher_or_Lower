@@ -2,7 +2,7 @@
     <string name="app_name">Higher or Lower</string>
     <string name="ofText"> of </string>
     <string name="streak_counter">STREAK: %d</string>
-    <string name="login_button_text">CHARTBOOST</string>
+    <string name="login_button_text">Login</string>
     <string name="leaderboard_button_text">Leaderboard (WIP)</string>
     <string name="extra_button1_text">TBA</string>
     <string name="extra_button2_text">TBA</string>

@@ -32,11 +32,11 @@ import static com.example.higherorlower.AppliClass.bgMusicPlayer;
 // TODO: 9/16/20 create "resume" function allowing user to resume game where left off
 // TODO: 9/16/20 start blackjack game 
 // TODO: 9/16/20 figure out how to migrate git data to a new app (want to change the android package name)
-// TODO: 9/16/20 continue scoreboard activities
 // TODO: 9/17/20 add user account creation feature (just username, leaderboard initials and password)
 // TODO: 9/17/20 add user login feature (similar to netflix select account) that asks for password
 // TODO: 9/17/20 add user profile page
 // TODO: 9/21/20 create settings menu (change current song, music volume/mute, sound effects volume / mute)
+// TODO: 9/21/20 scoreboard actiivty delayed. first need to implement sharedPreferences for scores, profiles and settings
 
 
 public class MainActivity extends Activity {
@@ -101,12 +101,12 @@ public class MainActivity extends Activity {
         leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-                Toast.makeText(getApplicationContext(),"WIP - Unavailable", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Sorry, nothing here", Toast.LENGTH_SHORT).show();
         }
         });
 
         extraButton1 = findViewById(R.id.extraButton1);
-        extraButton1.setText("Iterable");
+        extraButton1.setText("IT SDK");
         extraButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
@@ -115,18 +115,18 @@ public class MainActivity extends Activity {
         });
 
         extraButton2 = findViewById(R.id.extraButton2);
+        extraButton2.setText("CB SDK");
         extraButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Sorry, nothing here", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,CBActivity.class));
             }
         });
 
     }
 
     public void login_onclick(View v) {
-        startActivity(new Intent(MainActivity.this,CBActivity.class));
-
+        Toast.makeText(getApplicationContext(),"Sorry, nothing here", Toast.LENGTH_SHORT).show();
     }
 
     public ChartboostDelegate myDelegate = new ChartboostDelegate() {
