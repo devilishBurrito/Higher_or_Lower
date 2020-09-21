@@ -1,8 +1,11 @@
 package com.example.higherorlower;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +17,12 @@ import android.widget.Toast;
 import com.chartboost.sdk.CBLocation;
 import com.chartboost.sdk.Chartboost;
 
+import static com.example.higherorlower.AppliClass.bgMusicPlayer;
+
 
 public class HighLowActivity extends Activity {
+
+    MediaPlayer mplayer;
 
     Button playButton, highButton, lowButton;
     ImageView cardImage;
@@ -37,6 +44,7 @@ public class HighLowActivity extends Activity {
 
 
     public void initialize(){
+
         playButton = findViewById(R.id.playButton);
         playButton.setVisibility(View.VISIBLE);
         highButton = findViewById(R.id.HIGHER);
@@ -63,6 +71,7 @@ public class HighLowActivity extends Activity {
 
     }
 
+    // onClick method for playButton
     public void play(View v){
         Card c = mdeck.drawCard();
         prevCardValue = c.getValue();
@@ -113,36 +122,58 @@ public class HighLowActivity extends Activity {
 
         if (dir.equals("HIGHER")){
             if(cur > prev){
-                streak++;
-                Toast.makeText(this, "NICE!", Toast.LENGTH_SHORT).show();
+                win();
             } else if (cur <= prev){
-                streak = 0;
-                Toast.makeText(this, "Oof... nice try", Toast.LENGTH_SHORT).show();
+                loss();
             }
         } else if (dir.equals("LOWER")){
             if(cur < prev){
-                streak++;
-                Toast.makeText(this, "NICE!", Toast.LENGTH_SHORT).show();
+                win();
             } else if (cur >= prev){
-                streak = 0;
-                Toast.makeText(this, "Oof... nice try", Toast.LENGTH_SHORT).show();
+                loss();
                 if (Chartboost.hasInterstitial(CBLocation.LOCATION_DEFAULT)) {
                     Chartboost.showInterstitial(CBLocation.LOCATION_DEFAULT);
                 }
             }
         }
-
         prevCardValue = cur;
         streakText.setText(getString(R.string.streak_counter, streak));
         highScoreCheck(streak);
 
     }
 
+    private void win(){
+        mplayer = MediaPlayer.create(this, R.raw.ting);
+        mplayer.start();
+        streak++;
+        Toast.makeText(this, "NICE!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void loss(){
+        mplayer = MediaPlayer.create(this, R.raw.buzzer);
+        mplayer.start();
+        streak = 0;
+        Toast.makeText(this, "Oof... nice try", Toast.LENGTH_SHORT).show();
+    }
 
     private void highScoreCheck(int streak) {
         if (streak>highScore){
             highScore = streak;
             highScoreText.setText(getString(R.string.high_score_text, highScore));
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void onPause(){
+        super.onPause();
+        bgMusicPlayer.pause();
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume(){
+        super.onResume();
+        if (!bgMusicPlayer.isPlaying()){
+            bgMusicPlayer.start();
         }
     }
 

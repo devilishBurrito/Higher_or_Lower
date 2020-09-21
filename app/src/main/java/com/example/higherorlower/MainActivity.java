@@ -1,6 +1,8 @@
 package com.example.higherorlower;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import android.app.Activity;
 import android.app.Application;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -22,16 +25,18 @@ import com.chartboost.sdk.Model.CBError;
 import com.chartboost.sdk.Privacy.model.CCPA;
 import com.chartboost.sdk.Privacy.model.GDPR;
 
+import static com.example.higherorlower.AppliClass.bgMusicPlayer;
+
 
 // TODO: 9/16/20 Create "Pause" function for when user backgrounds / closes app 
 // TODO: 9/16/20 create "resume" function allowing user to resume game where left off
-// TODO: 9/16/20 add background music (royalty free) that pauses when app is backgrounded and resumes when foregrounded
 // TODO: 9/16/20 start blackjack game 
-// TODO: 9/16/20 figure out how to migrate git data to a new app (i want to change the android package name)
+// TODO: 9/16/20 figure out how to migrate git data to a new app (want to change the android package name)
 // TODO: 9/16/20 continue scoreboard activities
 // TODO: 9/17/20 add user account creation feature (just username, leaderboard initials and password)
 // TODO: 9/17/20 add user login feature (similar to netflix select account) that asks for password
 // TODO: 9/17/20 add user profile page
+// TODO: 9/21/20 create settings menu (change current song, music volume/mute, sound effects volume / mute)
 
 
 public class MainActivity extends Activity {
@@ -42,7 +47,8 @@ public class MainActivity extends Activity {
     public final String inter_loc = CBLocation.LOCATION_DEFAULT;
     public final String reward_loc = CBLocation.LOCATION_HOME_SCREEN;
 
-    RelativeLayout bannerContainer;
+    Button start,login,leaderboard,extraButton1, extraButton2;
+    ImageView settingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +77,16 @@ public class MainActivity extends Activity {
 
     private void start() {
 
-        Button start = findViewById(R.id.startButton);
+        settingsButton = findViewById(R.id.settingsImageView);
+        settingsButton.setImageResource(R.drawable.settings);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            }
+        });
+
+        start = findViewById(R.id.startButton);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
@@ -79,18 +94,18 @@ public class MainActivity extends Activity {
         }
         });
 
-        Button login = findViewById(R.id.loginButton);
+        login = findViewById(R.id.loginButton);
 
 
-        Button leaderboard = findViewById(R.id.leaderboardButton);
+        leaderboard = findViewById(R.id.leaderboardButton);
         leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-            startActivity(new Intent(MainActivity.this, Leaderboard.class));
+                Toast.makeText(getApplicationContext(),"WIP - Unavailable", Toast.LENGTH_SHORT).show();
         }
         });
 
-        Button extraButton1 = findViewById(R.id.extraButton1);
+        extraButton1 = findViewById(R.id.extraButton1);
         extraButton1.setText("Iterable");
         extraButton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +113,14 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(MainActivity.this, IterActivity.class));
             }
         });
-        Button extraButton2 = findViewById(R.id.extraButton2);
+
+        extraButton2 = findViewById(R.id.extraButton2);
+        extraButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"Sorry, nothing here", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -115,6 +137,20 @@ public class MainActivity extends Activity {
             Log.i(TAG,"CB SDK successfully initialized");
         }
     };
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void onPause(){
+        super.onPause();
+        bgMusicPlayer.pause();
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume(){
+        super.onResume();
+        if (!bgMusicPlayer.isPlaying()){
+            bgMusicPlayer.start();
+        }
+    }
 
 
 }
